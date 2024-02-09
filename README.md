@@ -1,9 +1,9 @@
 # MVC_FXML_226a_JDK17LTS
 ## C'est quoi ?
-C'est un template Visual Studio Code pour des projets et/ou exercices Java dès le 226a :
+C'est un template Visual Studio Code pour des projets et/ou exercices Java dès le ~~226a~~ 320 :
 - Basé sur JDK-17-LTS et FXML/JavaFX-17
 - Utilise le pattern MVC décidé en GT-DEV 2023
-- Utilise des interfaces entre les couches (car elles sont vues au module 226a)
+- Utilise des interfaces entre les couches (car elles sont vues au module ~~226a~~ 320)
 
 **-> Utile dès le module 226a quand on veut une ihm simple**
 ## Plusieurs versions de JavaFX sont inclues dans ce template !
