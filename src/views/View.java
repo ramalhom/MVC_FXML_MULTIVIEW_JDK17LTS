@@ -24,6 +24,9 @@ import ctrl.IControllerForView;
 public class View implements IViewForController, Initializable {
 
     private final IControllerForView controller;
+    
+    private Stage currentStage;
+    private Scene principalScene;
 
     @FXML
     private TextField textFieldPrevisionMeteo;
@@ -40,16 +43,36 @@ public class View implements IViewForController, Initializable {
     public void start() {
         Platform.startup( () -> {
             try {
-                Stage mainStage = new Stage();
+                currentStage = new Stage();
+                FXMLLoader fxmlLoader = new FXMLLoader( getClass().getResource( "viewLogin.fxml" ) );
+                fxmlLoader.setControllerFactory( type -> {
+                    return this;
+                } );
+                Parent root = ( Parent ) fxmlLoader.load();
+                principalScene = new Scene( root );
+                currentStage.setScene( principalScene );
+                currentStage.setTitle( "Application de démonstration" );
+                currentStage.show();
+            }
+            catch ( IOException ex ) {
+                ex.printStackTrace();
+                Platform.exit();
+            }
+        } );
+    }
+
+    public void changeView() {
+        Platform.runLater( () -> {
+            try {
                 FXMLLoader fxmlLoader = new FXMLLoader( getClass().getResource( "view.fxml" ) );
                 fxmlLoader.setControllerFactory( type -> {
                     return this;
                 } );
                 Parent root = ( Parent ) fxmlLoader.load();
-                Scene principalScene = new Scene( root );
-                mainStage.setScene( principalScene );
-                mainStage.setTitle( "Application de démonstration" );
-                mainStage.show();
+                principalScene = new Scene(root);
+                currentStage.setScene( principalScene );
+                currentStage.setTitle( "Application de démonstration" );
+                currentStage.show();
             }
             catch ( IOException ex ) {
                 ex.printStackTrace();
@@ -65,6 +88,7 @@ public class View implements IViewForController, Initializable {
     @FXML
     private void actionRafraichirPrevisionMeteo( ActionEvent event ) {
         controller.actionRafraichirPrevisionMeteo();
+        changeView();
     }
 
     @FXML
